@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 //router imports
-
 const knexRoutes = require('./routes/knex');
 
+//creates Express app
 const app = express();
 
 

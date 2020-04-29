@@ -20,9 +20,8 @@ const mutations = {
   [types.STORE_FETCHED_PLAYLISTS](state, payload) {
     state.playlists = payload
   },
-  postNewPlaylist() {
+  [types.STORE_POSTED_PLAYLISTS]() {
     const playlist = document.getElementById('newPlaylist')
-    console.log(playlist);
     axios.post(baseUrl + 'knex',
       { playlistName: playlist.value}
     )
@@ -33,27 +32,16 @@ const mutations = {
 
 //actions
 const actions = {
-  fetchPlaylists({ commit }) {
-    axios.get(baseUrl + 'knex')
-      .then(({ data }) => {
-        commit(types.STORE_FETCHED_PLAYLISTS, data);
-      })
-  },
-
-  // postNewPlaylist({ commit }) {
-  //   axios.post(baseUrl + 'knex',
-  //     { playlistName: 'dubstep' }
-  //   )
-  //     .then((response) => {
-  //       commit(types.STORE_POSTED_PLAYLISTS, response)
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
+  async fetchPlaylists({ commit }) {
+    try {
+    const resp = await axios.get(baseUrl + 'knex')
+      commit(types.STORE_FETCHED_PLAYLISTS, resp.data);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
 }
-
 
 export default {
   state,
