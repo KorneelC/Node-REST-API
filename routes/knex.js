@@ -5,10 +5,9 @@ const knexDb = require('../controller/knexdb');
 const router = express.Router();
 
 
-router.post('/knex', knexDb.postUser);
 
-router.get('/knex/:id', knexDb.getSpecificUser);
-router.get('/knex', knexDb.getUser);
+router.get('/knex', knexDb.getPlaylists);
+router.post('/knex', knexDb.PostNewPlaylist);
 
 
 module.exports = router;
