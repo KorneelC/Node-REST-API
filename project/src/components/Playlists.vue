@@ -1,9 +1,22 @@
 <template>
   <div class="list-wrapper">
-    <h1>Add new playlist</h1>
-    <div>
-      <input required id="newPlaylist" type="text" />
-      <button @click="STORE_POSTED_PLAYLISTS" type="submit">submit</button>
+    <h2>Add new playlist</h2>
+    <div class="post-playlist">
+      <form id="post-list">
+        <input :value="getPostPlaylist" @input="postPlaylist" type="text" required />
+        <p>You will submit a list with following name: {{getPostPlaylist}}</p>
+      </form>
+      <button @click="STORE_POSTED_PLAYLISTS" form="post-list" value="Submit" type="submit">Submit</button>
+    </div>
+    <div class="update-playlist">
+      <h2>Updating playlist</h2>
+      <form id="update-list">
+        <input required :value="getSearchPlaylist" @input="searchPlaylist" type="text" />
+        <p>You will update a list with following name: {{getSearchPlaylist}}</p>
+        <input :value="getUpdatedPlaylist" @input="updatePlaylist" required type="text" />
+        <p>the new name of the playlist : {{getUpdatedPlaylist}}</p>
+      </form>
+      <button @click="STORE_UPDATED_PLAYLISTS" form="update-list" type="submit">Update</button>
     </div>
     <ul>
       <li v-for="playlist in getPlaylists" :key="playlist.PlaylistId">{{playlist.Name}}</li>
@@ -18,10 +31,24 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations(["STORE_POSTED_PLAYLISTS"])
+    ...mapMutations(["STORE_POSTED_PLAYLISTS", "STORE_UPDATED_PLAYLISTS"]),
+    postPlaylist(e) {
+      this.$store.commit("postedPlaylist", e.target.value);
+    },
+    updatePlaylist(e) {
+      this.$store.commit("updatedPlaylist", e.target.value);
+    },
+    searchPlaylist(e) {
+      this.$store.commit("searchPlaylist", e.target.value);
+    }
   },
   computed: {
-    ...mapGetters(["getPlaylists"])
+    ...mapGetters([
+      "getPlaylists",
+      "getPostPlaylist",
+      "getUpdatedPlaylist",
+      "getSearchPlaylist"
+    ])
   }
 };
 </script>
@@ -33,7 +60,7 @@ export default {
   flex-wrap: wrap;
   width: 100vw;
 }
-h1 {
+h2 {
   text-align: center;
   width: 100%;
 }
@@ -57,5 +84,4 @@ li:nth-child(odd) {
 li:nth-child(even) {
   background-color: rgb(240, 226, 226);
 }
-
 </style>

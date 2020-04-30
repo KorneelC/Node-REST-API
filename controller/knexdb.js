@@ -41,11 +41,11 @@ exports.postNewPlaylist = async (req, res, next) => {
 }
 
 exports.updatePlaylist = async (req, res, next) => {
-    const playlist = Number(req.params.id);
+    const searchPlaylistName = req.body.searchPlaylistName
     const updatePlaylistName = req.body.updatePlaylistName
     try {
         await knex('playlists').where({
-            PlaylistId: playlist,
+            Name: searchPlaylistName,
         })
         .update({Name: updatePlaylistName})
         res.status(200).json({

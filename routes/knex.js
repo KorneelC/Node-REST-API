@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/knex', knexDb.getPlaylists);
 router.post('/knex', knexDb.postNewPlaylist);
-router.put('/knex/:id', knexDb.updatePlaylist);
+router.put('/knex', knexDb.updatePlaylist);
 router.delete('/knex/:id',knexDb.deletePlaylist);
 
 
