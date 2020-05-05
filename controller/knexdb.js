@@ -63,9 +63,9 @@ exports.updatePlaylist = async (req, res, next) => {
     }
 }
 exports.deletePlaylist =  async (req,res,next) => {
-    const playlist = Number(req.params.id) 
+    const playlist = req.body.deletePlaylist
     try {
-        await knex('playlists').where({PlaylistId: playlist}).del();
+        await knex('playlists').where({Name: playlist}).del();
         res.status(200).json({
             message: `deleted playlist ${playlist}`
         })

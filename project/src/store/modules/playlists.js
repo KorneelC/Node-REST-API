@@ -8,6 +8,7 @@ const state = {
   playlists: [],
   postPlaylist: null,
   updatePlaylist: null,
+  deletedPlaylist: null,
   searchPlaylist: null,
 };
 
@@ -24,6 +25,9 @@ const getters = {
   },
   getUpdatedPlaylist: state => {
     return state.updatePlaylist
+  },
+  getDeletedPlaylist: state => {
+    return state.deletedPlaylist
   }
 };
 
@@ -37,7 +41,7 @@ const mutations = {
       { playlistName: state.postPlaylist}
     )
   },
-  postedPlaylist (state, payload) {
+  [types.STORE_POST_PLAYLIST] (state, payload) {
     state.postPlaylist = payload
   },
   [types.STORE_UPDATED_PLAYLISTS](state) {
@@ -46,12 +50,22 @@ const mutations = {
       searchPlaylistName: state.searchPlaylist}
     )
   },
-  searchPlaylist (state,payload) {
+  [types.STORE_SEARCH_PLAYLIST] (state,payload) {
     state.searchPlaylist = payload
   },
-  updatedPlaylist (state, payload) {
+  [types.STORE_UPDATE_PLAYLIST] (state, payload) {
     state.updatePlaylist = payload
   },
+  [types.STORE_DELETED_PLAYLIST] (state) {
+    axios.delete(baseUrl, { data: {
+      deletePlaylist: state.deletedPlaylist
+    }
+    }
+      )
+  },
+  [types.STORE_DELETE_PLAYLIST] (state, payload) {
+    state.deletedPlaylist = payload
+  }
 }
 
 
