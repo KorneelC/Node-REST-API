@@ -73,8 +73,8 @@ const mutations = {
 const actions = {
   async fetchPlaylists({ commit }) {
     try {
-    const resp = await axios.get(baseUrl)
-      commit(types.STORE_FETCHED_PLAYLISTS, resp.data);
+    const {data} = await axios.get(baseUrl)
+      commit(types.STORE_FETCHED_PLAYLISTS, data);
     }
     catch(error){
       console.log(error);

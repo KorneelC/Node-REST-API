@@ -1,6 +1,6 @@
 <template>
   <div class="list-wrapper">
-    <playlist-basic :id="postPlaylistInfo.id" :title="postPlaylistInfo.title" :valuePlaylist="postPlaylistInfo.valuePlaylist" :inputMethod="postPlaylistInfo.inputMethod" />
+    <post-request :id="postPlaylistInfo.id" :title="postPlaylistInfo.title" :valuePlaylist="postPlaylistInfo.valuePlaylist" />
     <div class="playlist">
       <h2>Updating playlist</h2>
       <form id="update-list">
@@ -13,13 +13,14 @@
     </div>
     <deleted-playlist></deleted-playlist>
     <ul>
-      <li v-for="playlist in getPlaylists" :key="playlist.PlaylistId">{{playlist.Name}}</li>
+      <li v-for="playlist in getPlaylists" :key="playlist.PlaylistId">{{playlist.PlaylistId}}. {{playlist.Name}}</li>
     </ul>
   </div>
+
 </template>
 
 <script>
-import playlistBasic from './subcomponents/PlaylistBasic.vue';
+import postRequest from './subcomponents/PostRequest.vue';
 import deletedPlaylist from './subcomponents/DeleteRequest.vue'
 import { mapGetters, mapMutations } from "vuex";
 export default {
@@ -38,7 +39,7 @@ export default {
     };
   },
   components:{
-    playlistBasic,
+    postRequest,
     deletedPlaylist
   },
   methods: {

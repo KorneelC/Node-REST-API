@@ -22,8 +22,8 @@ exports.getPlaylists = async (req, res, next) => {
 }
 
 exports.postNewPlaylist = async (req, res, next) => {
+    const playlistName = req.body.playlistName
     try {
-        const playlistName = req.body.playlistName
         await knex('playlists').insert({ Name: playlistName })
         res.status(201).json({
             message: "created new playlist",

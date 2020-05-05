@@ -3,7 +3,7 @@
    <h2>{{title}}</h2>
     <div>
       <form :id="id">
-        <input v-model="valuePlaylist" @input="postPlaylist" type="text" required />
+        <input :value="getPostPlaylist" @input="postPlaylist" type="text" required />
         <p>You will submit a list with following name: <span>{{valuePlaylist}}</span></p>
       </form>
       <button @click="STORE_POSTED_PLAYLISTS" :form="id" value="Submit" type="submit">Submit</button>
